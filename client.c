@@ -6,13 +6,13 @@
 /*   By: sdavi-al <sdavi-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 11:45:05 by sdavi-al          #+#    #+#             */
-/*   Updated: 2025/02/01 21:20:38 by sdavi-al         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:48:34 by sdavi-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-volatile sig_atomic_t	g_ack_received = 0;
+static volatile sig_atomic_t	g_ack_received = 0;
 
 void	acknowledge(int sig)
 {
@@ -33,7 +33,7 @@ void	send_char(int pid, char c)
 		else
 			kill(pid, SIGUSR1);
 		while (!g_ack_received)
-			pause();
+			;
 		bit++;
 	}
 }
